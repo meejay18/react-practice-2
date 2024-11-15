@@ -75,15 +75,15 @@ const Menu = () => {
       <h2>Our Menu</h2>
       <Pizza
         name="Pizza Spinaci"
-        ingredient=" Tomato mozarella spinach and ricotta cheese "
+        ingredients=" Tomato mozarella spinach and ricotta cheese "
         photoName=" pizzas/spinaci.jpg"
-        price="10"
+        price={10}
       />
       <Pizza
         name="pizza funghi"
-        ingredient="garlic lemmon chicken and tomato"
+        ingredients="garlic lemmon chicken and tomato"
         photoName="pizzas/funghi.jpg"
-        price="20"
+        price={20}
       />
       <Pizza />
       <Pizza />
@@ -95,10 +95,14 @@ const Pizza = (props) => {
   console.log(props);
 
   return (
-    <div>
+    <div className="pizza">
       <img src={props.photoName} alt={props.name} />
-      <h3>{props.name}</h3>
-      <p> {props.ingredient} </p>
+
+      <div>
+        <h3>{props.name}</h3>
+        <p> {props.ingredients} </p>
+        <span>{props.price + 3}</span>
+      </div>
     </div>
   );
 };
