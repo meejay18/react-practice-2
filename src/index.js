@@ -85,8 +85,20 @@ const Menu = () => {
         photoName="pizzas/funghi.jpg"
         price={20}
       />
-      <Pizza />
-      <Pizza />
+      <Pizza
+        name="Pizza Salamino "
+        ingredients="Tomato, mozarella, and pepperoni"
+        price={15}
+        photoName="pizzas/salamino.jpg"
+        soldOut={true}
+      />
+      <Pizza
+        name="Pizza Prosciutto"
+        ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
+        price={18}
+        photoName="pizzas/prosciutto.jpg"
+        soldOut={false}
+      />
     </main>
   );
 };
