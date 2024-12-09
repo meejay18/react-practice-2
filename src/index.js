@@ -73,7 +73,13 @@ const Menu = () => {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza
+
+      <div>
+        {pizzaData.map((pizza) => (
+          <Pizza name={pizza.name} photoName={pizza.photoName} />
+        ))}
+      </div>
+      {/* <Pizza
         name="Pizza Spinaci"
         ingredients=" Tomato mozarella spinach and ricotta cheese "
         photoName=" pizzas/spinaci.jpg"
@@ -98,7 +104,7 @@ const Menu = () => {
         price={18}
         photoName="pizzas/prosciutto.jpg"
         soldOut={false}
-      />
+      /> */}
     </main>
   );
 };
@@ -127,8 +133,11 @@ const Footer = () => {
   console.log(isOpen);
   console.log(hour);
 
-  // if () alert("We are currently open");
-  // else alert("Sorry we are closed");
+  if (isOpen) {
+    alert("We are currently open");
+  } else {
+    alert("Sorry we are closed");
+  }
 
   return (
     <div className="footer">
