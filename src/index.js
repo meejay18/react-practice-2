@@ -49,7 +49,7 @@ const pizzaData = [
 
 const App = () => {
   return (
-    <div className="container">
+    <div className="container ">
       <Header />
       <Menu />
       <Footer />
@@ -70,15 +70,30 @@ const Header = () => {
 };
 
 const Menu = () => {
+  const pizzas = pizzaData;
+  // const pizzas = [];
+  const numPizzas = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <div>
-        {pizzaData.map((pizza) => (
-          <Pizza name={pizza.name} photoName={pizza.photoName} />
-        ))}
-      </div>
+      {numPizzas > 0 ? (
+        <>
+          <p>
+            Authentic Italian Cuisine. 6 dishes to choose from. All from our
+            stone oven, all organic , all delicious.
+          </p>
+
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p> We are currently working on the menu come back later </p>
+      )}
+
       {/* <Pizza
         name="Pizza Spinaci"
         ingredients=" Tomato mozarella spinach and ricotta cheese "
@@ -109,17 +124,26 @@ const Menu = () => {
   );
 };
 
-const Pizza = (props) => {
-  console.log(props);
+const Pizza = ({ pizzaObj }) => {
+  console.log(pizzaObj);
+
+  // if (pizzaObj.soldOut) return null;
 
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
+    <div className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
 
       <div>
-        <h3>{props.name}</h3>
-        <p> {props.ingredients} </p>
-        <span>{props.price + 3}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p> {pizzaObj.ingredients} </p>
+
+        {/* {pizzaObj.soldOut ? (
+          <span>SOLD OUT</span>
+        ) : (
+          <span> {pizzaObj.price}</span>
+        )} */}
+
+        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
       </div>
     </div>
   );
@@ -127,25 +151,44 @@ const Pizza = (props) => {
 
 const Footer = () => {
   const hour = new Date().getHours();
-  const openHour = 8;
+  const openHour = 5;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
   console.log(hour);
+  console.log(openHour);
+  console.log(closeHour);
 
-  if (isOpen) {
-    alert("We are currently open");
-  } else {
-    alert("Sorry we are closed");
-  }
+  // if (isOpen) {
+  //   alert("We are currently open");
+  // } else {
+  //   alert("Sorry we are closed");
+  // }
 
   return (
-    <div className="footer">
-      {new Date().toLocaleTimeString()} We are currently Open
-    </div>
+    <footer className="footer">
+      {isOpen ? (
+        <Order closeHour={closeHour} openHour={openHour} />
+      ) : (
+        <p>
+          We are open from {openHour}:00 to {closeHour}:00 Thank you😇😇❤️❤️
+        </p>
+      )}
+    </footer>
   );
 };
 
+const Order = function ({ closeHour, openHour }) {
+  return (
+    <div className="order">
+      <p>
+        We are currently from {openHour} to {closeHour}.00 Come visit us or
+        order online
+      </p>
+      <button className="btn">Order</button>
+    </div>
+  );
+};
 const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
